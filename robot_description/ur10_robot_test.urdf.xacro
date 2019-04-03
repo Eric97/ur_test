@@ -25,6 +25,10 @@
 
   <xacro:sensor_kinect prefix="${robot_prefix1}" parent="ee_link"/>
 
+  <xacro:include filename="$(find ur_test)/robot_description/r2d2_gripper.urdf.xacro"/>
+  <xacro:gripper prefix="left" parent="gripper_extender_link" reflect="1" />
+  <xacro:gripper prefix="right" parent="gripper_extender_link" reflect="-1" />
+
   <link name="world" />
 
   <joint name="world_joint" type="fixed">

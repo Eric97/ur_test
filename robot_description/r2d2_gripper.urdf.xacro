@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="ur10_r2d2_gripper" >
+
+    <xacro:macro name="gripper" params="prefix parent reflect">
+    <joint name="${prefix}_gripper_joint" type="revolute">
+      <axis xyz="0 0 ${reflect}"/>
+      <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+      <origin rpy="0 0 0" xyz="0.2 ${reflect*0.01} 0"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_gripper"/>
+      <limit effort="30" velocity="1.0"/>
+      <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <link name="${prefix}_gripper">
+      <visual>
+        <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://urdf_tutorial/meshes/l_finger.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://urdf_tutorial/meshes/l_finger.dae"/>
+        </geometry>
+        <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0 0 0"/>
+      </collision>
+    <inertial>
+      <mass value="0.264" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+               iyy="0.000498940" iyz="0.0"
+               izz="0.003879257" />
+    </inertial>
+    </link>
+    <transmission name="${prefix}_gripper_trans" type="SimpleTransmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="${prefix}_gripper_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${prefix}_gripper_joint">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+
+    <joint name="${prefix}_tip_joint" type="fixed">
+      <parent link="${prefix}_gripper"/>
+      <child link="${prefix}_tip"/>
+    </joint>
+    <link name="${prefix}_tip">
+      <visual>
+        <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0.09137 0.00495 0"/>
+        <geometry>
+          <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
+        </geometry>
+        <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0.09137 0.00495 0"/>
+      </collision>
+    <inertial>
+      <mass value="0.264" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+               iyy="0.000498940" iyz="0.0"
+               izz="0.003879257" />
+    </inertial>
+ 
+      <!-- <xacro:default_inertial mass="0.05"/> -->
+    </link>
+  </xacro:macro>
+
+</robot>
+
+
