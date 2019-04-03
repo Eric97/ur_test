@@ -17,6 +17,12 @@
   <!-- kinect sensor -->
   <xacro:include filename="$(find ur_test)/robot_description/kinect.urdf.xacro" />
 
+  <!-- Robotiq gripper -->
+  <xacro:include filename="$(find robotiq_85_description)/urdf/robotiq_85_gripper.urdf.xacro"/>
+  <xacro:robotiq_85_gripper prefix="" parent="gripper_extender_link">
+    <origin xyz="0.1 0 0" rpy="${M_PI/2} -${M_PI/2} 0" />
+  </xacro:robotiq_85_gripper>
+
   <!-- arm -->
   <xacro:ur10_robot prefix="" joint_limited="false"/>
 
