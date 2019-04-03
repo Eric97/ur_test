@@ -101,11 +101,6 @@ int main(int argc, char** argv)
       moveit::planning_interface::MoveItErrorCode::SUCCESS);
   ROS_INFO_NAMED("test", "plan 2 (joint space goal) %s", success ? "" : "FAILED");
 
-  // while(ros::ok())
-  // {
-  //   ros::spinOnce();
-  // }
-  ros::shutdown();
   return 0;
 }
 

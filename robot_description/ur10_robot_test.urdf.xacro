@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="ur10" >
+
+  <property name="kinect_prefix1" value=""/>
+  <property name="robot_prefix1" value=""/>
+  <property name="M_PI" value="3.14159265359" />
+  <!-- common stuff -->
+  <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+
+  <!-- ur10 -->
+  <xacro:include filename="$(find ur_description)/urdf/ur10.urdf.xacro" />
+
+  <!-- arm extras -->
+  <xacro:include filename="$(find ur_test)/robot_description/arm_extras_ur10.urdf.xacro" />
+
+  <!-- kinect sensor -->
+  <xacro:include filename="$(find ur_test)/robot_description/kinect.urdf.xacro" />
+
+  <!-- arm -->
+  <xacro:ur10_robot prefix="" joint_limited="false"/>
+
+  <!-- arm extras -->
+  <xacro:arm_extras prefix="${robot_prefix1}" joint_limited="false" kinect_prefix="${kinect_prefix1}"/>
+
+  <xacro:sensor_kinect prefix="${robot_prefix1}" parent="ee_link"/>
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "ground_base1" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+</robot>
