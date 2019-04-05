@@ -39,6 +39,7 @@ catkin_package(
 
 include_directories(${THIS_PACKAGE_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS})
 
-add_executable(ur5_test src/ur5_test.cpp)
-target_link_libraries(ur5_test ${catkin_LIBRARIES} )
-
+# add_executable(ur5_test src/ur5_test.cpp)
+# target_link_libraries(ur5_test ${catkin_LIBRARIES} )
+add_subdirectory(examples/simple_planning)
+add_subdirectory(examples/pick_place)
